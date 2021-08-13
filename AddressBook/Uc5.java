@@ -13,8 +13,8 @@ import java.util.Scanner;
 
 public class Uc5 {
 
-    // Use addContacts method and get input from user
-    public static void addContacts() {
+     // Use addContacts method and get input from user
+    public static ArrayList<Contacts> addContacts() {
 
         Scanner sc = new Scanner(System.in);
         Contacts contacts = new Contacts();
@@ -75,5 +75,6 @@ public class Uc5 {
         contacts.setEmail(email);
 
         Uc6.addNewContacts(stateid,contacts);
+        return AddressBookMainFunction.contatctsArrayList1;
     }
 }

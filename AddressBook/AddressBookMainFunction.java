@@ -3,6 +3,7 @@
  * Ability to create a Contacts in AddressBook
  * Add first and last names, address, city, state, zip, phone number and email
  * Ability to Add new contacts , Edit existing contacts , Delete contacts
+ * Ability to Read or Write the Address Book with Persons Contact into a File using File IO
  *
  * @author : Immanuvel Jeeva
  * @Sice   : 20-07-2021
@@ -40,7 +41,8 @@ public class AddressBookMainFunction {
         int choice = sc.nextInt();
         switch (choice) {
             case 1 -> {
-                Uc5.addContacts();
+                contatctsArrayList = Uc5.addContacts();
+                readWriteObj.writeInAddressBook(contatctsArrayList);
                 mainMenu();
             }
             case 2 -> {
@@ -52,17 +54,7 @@ public class AddressBookMainFunction {
                 mainMenu();
             }
             case 4 -> {
-                System.out.println("Enter Which State AddressBook You Want To See :");
-                System.out.println("1.Delhi\n2TamilNadu\n3.Mumbai\n4.Kerala\n5.Punjab");
-                int id = sc.nextInt();
-                switch (id) {
-                    case 1 -> View(AddressBookMainFunction.contatctsArrayList1);
-                    case 2 -> View(AddressBookMainFunction.contatctsArrayList2);
-                    case 3 -> View(AddressBookMainFunction.contatctsArrayList3);
-                    case 4 -> View(AddressBookMainFunction.contatctsArrayList4);
-                    case 5 -> View(AddressBookMainFunction.contatctsArrayList5);
-                    default -> System.out.println("SomeThing Went Wrong");
-                }
+                readWriteObj.readFromAddressBook();
                 mainMenu();
             }
             case 5 ->{
@@ -89,15 +81,6 @@ public class AddressBookMainFunction {
             case 9 -> System.out.println("Thanking You");
             default -> System.out.println("Some thing Wrong");
         }
-    }
-
-    // View The Contact List
-    private static void View(ArrayList<Contacts> contatctsArrayList) {
-        for (Contacts i : contatctsArrayList) {
-            System.out.println(i);
-        }
-        if(contatctsArrayList.isEmpty())
-            System.out.println("Contacts List is Empty");
     }
 
     public static void main(String[] args) {
