@@ -4,17 +4,19 @@
  * Add first and last names, address, city, state, zip, phone number and email
  * Ability to Add new contacts , Edit existing contacts , Delete contacts
  * Ability to Read or Write the Address Book with Persons Contact into a File using File IO
- * Ability to Read/Write the Address Book with Persons Contact as CSV File
- * - Use OpenCSV Library
+ * Ability to Read/Write the Address Book with Persons Contact as CSV File - Use OpenCSV Library
+ * Ability to Read or Write the Address Book with Persons Contact as JSON File UC 15 - Use GSON Library
  *
  * @author : Immanuvel Jeeva
- * @Sice   : 20-07-2021
+ * @Sice   : 16-08-2021
  *
  ********************************************************************************************************************************************************************/
 package com.company.Addressbook;
 
 import com.company.Addressbook.CSVFileIO.ReadWriteCSVFile;
 import com.company.Addressbook.FileIO.ReadWriteOperations;
+import com.company.Addressbook.JSONFileIO.ReadWriteJSONFile;
+import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +33,11 @@ public class AddressBookMainFunction {
 
     public static  ReadWriteOperations readWriteObj = new ReadWriteOperations();
     public static ReadWriteCSVFile csvObj = new ReadWriteCSVFile();
+    public static ReadWriteJSONFile jsonObj = new ReadWriteJSONFile();
 
     public static HashMap<String,ArrayList<Contacts>> TotalAddressBook = new HashMap<>();
 
-    static void mainMenu() {
+    static void mainMenu() throws ParseException {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\n================================== ADDRESS BOOK =========================================");
@@ -54,6 +57,7 @@ public class AddressBookMainFunction {
                 contatctsArrayList = Uc5.addContacts();
                 readWriteObj.writeInAddressBook(contatctsArrayList);
                 csvObj.writeCSVFile(contatctsArrayList);
+                jsonObj.writeJSONFile(contatctsArrayList);
                 mainMenu();
             }
             case 2 -> {
@@ -67,6 +71,7 @@ public class AddressBookMainFunction {
             case 4 -> {
                 readWriteObj.readFromAddressBook();
                 csvObj.readCSVFile();
+                jsonObj.readJSONFile();
                 mainMenu();
             }
             case 5 ->{
@@ -99,7 +104,7 @@ public class AddressBookMainFunction {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         mainMenu();
     }
