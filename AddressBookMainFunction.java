@@ -4,12 +4,17 @@
  * Add first and last names, address, city, state, zip, phone number and email
  * Ability to Add new contacts , Edit existing contacts , Delete contacts
  * Ability to Read or Write the Address Book with Persons Contact into a File using File IO
+ * Ability to Read/Write the Address Book with Persons Contact as CSV File
+ * - Use OpenCSV Library
  *
  * @author : Immanuvel Jeeva
  * @Sice   : 20-07-2021
  *
  ********************************************************************************************************************************************************************/
 package com.company.Addressbook;
+
+import com.company.Addressbook.CSVFileIO.ReadWriteCSVFile;
+import com.company.Addressbook.FileIO.ReadWriteOperations;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +27,10 @@ public class AddressBookMainFunction {
     public static ArrayList<Contacts> contatctsArrayList3 = new ArrayList<>();
     public static ArrayList<Contacts> contatctsArrayList4 = new ArrayList<>();
     public static ArrayList<Contacts> contatctsArrayList5 = new ArrayList<>();
+    public static ArrayList<Contacts> contatctsArrayList = new ArrayList<>();
+
+    public static  ReadWriteOperations readWriteObj = new ReadWriteOperations();
+    public static ReadWriteCSVFile csvObj = new ReadWriteCSVFile();
 
     public static HashMap<String,ArrayList<Contacts>> TotalAddressBook = new HashMap<>();
 
@@ -37,12 +46,14 @@ public class AddressBookMainFunction {
         System.out.println("6 . Search a Person");
         System.out.println("7 . View exact person Details");
         System.out.println("8 . Get Total Number of contact Present in Specific AddressBook");
-        System.out.println("9 . Exit");
+        System.out.println("9 . Sort the AddressBook by userWish");
+        System.out.println("10 . Exit");
         int choice = sc.nextInt();
         switch (choice) {
             case 1 -> {
                 contatctsArrayList = Uc5.addContacts();
                 readWriteObj.writeInAddressBook(contatctsArrayList);
+                csvObj.writeCSVFile(contatctsArrayList);
                 mainMenu();
             }
             case 2 -> {
@@ -55,6 +66,7 @@ public class AddressBookMainFunction {
             }
             case 4 -> {
                 readWriteObj.readFromAddressBook();
+                csvObj.readCSVFile();
                 mainMenu();
             }
             case 5 ->{
@@ -78,7 +90,11 @@ public class AddressBookMainFunction {
                 Uc10.GetTotalcount();
                 mainMenu();
             }
-            case 9 -> System.out.println("Thanking You");
+            case 9 ->{
+                Uc12.sortByUserWish();
+                mainMenu();
+            }
+            case 10 -> System.out.println("Thanking You");
             default -> System.out.println("Some thing Wrong");
         }
     }
